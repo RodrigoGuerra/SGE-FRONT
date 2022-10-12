@@ -1,0 +1,34 @@
+<mat-sidenav-container class="app-sidenav-container" [dir]="'ltr'">
+    <mat-sidenav #sidenav class="app-sidenav mat-elevation-z2" [opened]="!isScreenSmall()"
+      [mode]="isScreenSmall() ? 'over' : 'side'">
+      <mat-toolbar class="toolbar">
+  
+        <div class="sidebar-profile">
+          <div class="user-pic">
+            <img class="img-responsive img-rounded" [src]="photoUrl" alt="User picture">
+          </div>
+          <div class="user-info">
+            <span class="user-name">
+              <strong>{{userName}}</strong>
+            </span>
+            <span class="user-role">Administrator</span>
+          </div>
+        </div>
+  
+      </mat-toolbar>
+      <mat-nav-list>        
+      </mat-nav-list>
+      <div class="copyright-container">
+        <div fxFlex>
+          <button (click)="logOut()">
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
+        </div>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content class="app-sidenav-content">
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
