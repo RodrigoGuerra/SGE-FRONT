@@ -5,9 +5,9 @@ export const query_get_user_by_email = gql` query ($emailStr:String!) {
         userId
         email
         name
+        roleId
         createdAt
         updatedAt
-        roleId
     }
 }`;
 

@@ -17,6 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './main/main.component';
 import { GraphQLModule } from './graphql/graphql.module';
 import {RegistrationScreenComponent} from './registration-screen/registration-screen.component';
+import { SchoolsComponent } from './schools/schools.component';
+import { PersonComponent } from './person/person.component';
+import { DisciplineComponent } from './discipline/discipline.component';
+import { TeamComponent } from './team/team.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,10 @@ import {RegistrationScreenComponent} from './registration-screen/registration-sc
     SidenavComponent,
     MainComponent,
     RegistrationScreenComponent,
+    SchoolsComponent,
+    PersonComponent,
+    DisciplineComponent,
+    TeamComponent,
   ],
   imports: [
     BrowserModule,

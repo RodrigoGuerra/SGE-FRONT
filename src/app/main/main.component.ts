@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
     this.isLoggedin = this.socialUser ? true : false;
     console.log(this.socialUser);
     if (this.isLoggedin) {
-      this.router.navigate(['/main/leads']);
+      this.router.navigate(['/main/schools']);
     } else {
       this.router.navigate(['/login']);
     }

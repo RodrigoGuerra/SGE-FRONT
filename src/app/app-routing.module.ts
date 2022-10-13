@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from '../app/login/login.component';
 import { MainComponent } from './main/main.component';
+import { SchoolsComponent } from './schools/schools.component';
 import { RegistrationScreenComponent } from './registration-screen/registration-screen.component';
 
 const routes: Routes = [
@@ -12,10 +13,10 @@ const routes: Routes = [
     path: 'main',
     component: MainComponent,
     children: [
-      // {
-      //   path: 'leads',
-      //   component: LeadDashboardComponent,
-      // },
+      {
+        path: 'school',
+        component: SchoolsComponent,
+      },
       // { 
       //   path: 'integration',
       //  component: IntegrationComponent 
