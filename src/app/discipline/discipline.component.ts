@@ -10,6 +10,7 @@ export class DisciplineComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('Discipline');
   }
 
 }

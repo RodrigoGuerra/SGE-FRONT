@@ -10,6 +10,7 @@ export class TeamComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('Team');
   }
 
 }

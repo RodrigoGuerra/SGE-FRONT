@@ -10,6 +10,7 @@ export class SchoolsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('Schools');
   }
 
 }
