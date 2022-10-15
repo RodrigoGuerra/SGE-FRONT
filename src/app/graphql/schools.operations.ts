@@ -36,6 +36,16 @@ export const mutation_update_school = gql` mutation ($updateSchoolInput:UpdateSc
   }
 `;
 
-export const mutation_delete_school = gql` mutation($SchoolIdStr: String!) {
-    removeSchool(SchoolId: $SchoolIdStr)
+export const mutation_delete_school = gql` mutation($schoolId: String!) {
+    removeSchool(schoolId: $schoolId)
   }`;
+
+export const query_get_schools_by_manager = gql` query ($managerUserIdStr:String!) {
+  schoolsByManager(managerUserId: $managerUserIdStr) {
+      schoolId
+      name
+      managerId
+      createdAt
+      updatedAt
+  }
+}`;

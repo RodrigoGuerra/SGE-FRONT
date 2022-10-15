@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
                   console.log(err);
                 });
                 this.sessionService.clearAllInfos();
-                alert('Usu·rio n„o econtrado! VocÍ ser· redirecionado para a ·rea de cadastro!')
+                alert('Usu√°rio n√£o encontrado! Voc√™ ser√° redirecionado para a √°rea de cadastro!')
                 this.router.navigate(['/registration'])
             });
         }

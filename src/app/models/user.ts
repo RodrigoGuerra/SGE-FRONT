@@ -5,6 +5,10 @@ export class User{
 
   name!: string;
 
+  phone!: string;
+
+  age!: number;
+
   roleId!: number 
 
   createdAt!: string;

@@ -15,7 +15,6 @@ export class SidenavComponent implements OnInit {
   private mediaMatcher: MediaQueryList = matchMedia(
     `(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`
   );
-  //leads: Observable<Lead[]> | undefined;
   isIndigoTheme: boolean = false;
   dir: string = 'ltr';
   user: SocialUser | null = new SocialUser();
@@ -25,7 +24,6 @@ export class SidenavComponent implements OnInit {
   photoUrl: string = '';
   isManager = false;
   constructor(
-    // private leadService: LeadService,
     private router: Router,
     private authService: SocialAuthService,
     private sessionService: SessionService

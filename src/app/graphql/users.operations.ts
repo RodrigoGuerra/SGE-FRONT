@@ -5,6 +5,8 @@ export const query_get_user_by_email = gql` query ($emailStr:String!) {
         userId
         email
         name
+        phone
+        age
         roleId
         createdAt
         updatedAt
@@ -18,6 +20,8 @@ export const mutation_create_user = gql` mutation ($createUserInput:CreateUserIn
         userId
         email
         name
+        phone
+        age
         roleId
         createdAt
         updatedAt
@@ -32,6 +36,8 @@ export const mutation_update_user = gql` mutation ($updateUserInput:UpdateUserIn
         userId
         email
         name
+        phone
+        age
         roleId
         createdAt
         updatedAt

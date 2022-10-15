@@ -11,7 +11,7 @@
     display: flex;
     height: 100%;
     flex-direction: column;
-    background-color: black;
+    background-color: rgb(50, 92, 231);
   }
   
   .app-sidenav {
@@ -79,7 +79,7 @@
 
 .toolbar{
   display: table;
-  background-color: black;
+  background-color: rgb(50, 92, 231);
   color: white;
 }
 
@@ -94,7 +94,7 @@ mat-sidenav{
 }
 
 .mat-list-item,span{
-  color: white;
+  color: rgb(50, 92, 231);
 }
 
 mat-icon{

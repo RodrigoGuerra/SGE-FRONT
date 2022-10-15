@@ -16,7 +16,28 @@
         </div>
   
       </mat-toolbar>
-      <mat-nav-list>        
+      <mat-nav-list>
+        <a [routerLink]="['/main/schools']" *ngIf="isManager" >
+          <mat-list-item>
+            <span class="user-name">
+              <strong>Escolas</strong>
+            </span>
+          </mat-list-item>
+        </a>
+        <a [routerLink]="['/main/disciplines']" *ngIf="isManager" >
+          <mat-list-item>
+            <span class="user-name">
+              <strong>Disciplinas</strong>
+            </span>
+          </mat-list-item>
+        </a>  
+        <a [routerLink]="['/main/teams']" *ngIf="isManager" >
+          <mat-list-item>
+            <span class="user-name">
+              <strong>Turmas</strong>
+            </span>
+          </mat-list-item>
+        </a>    
       </mat-nav-list>
       <div class="copyright-container">
         <div fxFlex>

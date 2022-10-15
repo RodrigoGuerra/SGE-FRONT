@@ -17,6 +17,7 @@ export class RegistrationScreenComponent implements OnInit {
   email=""
   name=""
   phone=""
+  age=0
 
   socialUser?: SocialUser | null;
   form: FormGroup;
@@ -30,6 +31,7 @@ export class RegistrationScreenComponent implements OnInit {
         email: [""],
         phone: [""],
         name: [""],
+        age: [0],
       });
      }
 
@@ -39,10 +41,12 @@ export class RegistrationScreenComponent implements OnInit {
 
   createUser(): void{
     
-    const {name,email,phone} = this.form.value
+    const {name,email,phone,age} = this.form.value
     const user: User ={
       email:email,
       name:name,
+      phone:phone,
+      age:Number(age),
       userId:"",
       createdAt: (new Date()).toLocaleString(),
       roleId:1

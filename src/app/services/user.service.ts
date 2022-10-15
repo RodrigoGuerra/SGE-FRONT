@@ -36,6 +36,8 @@ export class UserService {
       userId: user.userId,
       email: user.email,
       name: user.name,
+      phone: user.phone,
+      age: user.age,
     };
     return new Promise((resolver, reject) => {
       this.apollo
@@ -72,11 +74,14 @@ export class UserService {
         });
     });
   }
-
+  
   createNewUser(user: User):Promise<User> {
     const createUserInput = {
       email: user.email,
       name: user.name,
+      phone: user.phone,
+      age: user.age,
+      roleId: user.roleId,
     };
     return new Promise((resolver, reject) => {
       this.apollo

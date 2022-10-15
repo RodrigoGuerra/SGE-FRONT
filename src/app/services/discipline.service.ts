@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   query_get_discipline_by_name,
+  query_get_all_disciplines,
   mutation_create_discipline,
   mutation_update_discipline,
   mutation_delete_discipline,
@@ -65,6 +66,26 @@ export class DisciplineService {
             reject('Discipline not found');
           }
           resolver(result.data.disciplineByName);
+        }),
+        catchError((error: any) => {
+          throw new Error(error);
+        });
+    });
+  }
+
+  getAllDisciplines(): Promise<Discipline> {
+    return new Promise((resolver, reject) => {
+      this.apollo
+        .watchQuery({
+          fetchPolicy: 'no-cache',
+          query: query_get_all_disciplines,
+          variables: {},
+        })
+        .valueChanges.subscribe((result: any) => {
+          if (!result.data.allDisciplines) {
+            reject('Discipline not found');
+          }
+          resolver(result.data.allDisciplines);
         }),
         catchError((error: any) => {
           throw new Error(error);

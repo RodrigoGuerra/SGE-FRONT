@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   query_get_school_by_name,
+  query_get_schools_by_manager,
   mutation_create_school,
   mutation_update_school,
   mutation_delete_school,
@@ -14,7 +15,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class schoolService {
+export class SchoolService {
   private _schoolsSet: BehaviorSubject<School[]>;
 
   private dataStore: {
@@ -31,7 +32,7 @@ export class schoolService {
     return this._schoolsSet.asObservable();
   }
 
-  updateSchool(school: School): Promise<School> {
+  updateSchool(school: School, userRelatedStr: string): Promise<School> {
     const updateSchoolInput = {
       schoolId: school.schoolId,
       name: school.name,
@@ -42,7 +43,7 @@ export class schoolService {
         .mutate({
           fetchPolicy: 'no-cache',
           mutation: mutation_update_school,
-          variables: { updateSchoolInput },
+          variables: { updateSchoolInput, userRelatedStr},
         })
         .subscribe((result: any) => {
           resolver(result.data.updateSchool as School);
@@ -53,7 +54,7 @@ export class schoolService {
     });
   }
 
-  getSchoolBySchool(nameStr: string): Promise<School> {
+  getSchoolByName(nameStr: string): Promise<School> {
     return new Promise((resolver, reject) => {
       this.apollo
         .watchQuery({
@@ -73,10 +74,30 @@ export class schoolService {
     });
   }
 
-  createNewSchool(school: School):Promise<School> {
+  getSchoolsByManager(managerUserIdStr: String) {
+    return (
+      this.apollo
+        .watchQuery({
+          fetchPolicy: 'no-cache',
+          query: query_get_schools_by_manager,
+          variables: { managerUserIdStr },
+        })
+        .valueChanges.subscribe((result: any) => {
+          console.log('Result');
+          console.log(result.data);
+          this.dataStore.schoolsSet = result.data.schoolsByManager;
+          this._schoolsSet.next(this.dataStore.schoolsSet);
+        }),
+      catchError((error: any) => {
+        throw new Error(error);
+      })
+    );
+  }
+
+  createNewSchool(school: School,userRelatedStr: string):Promise<School> {
     const createSchoolInput = {
       name: school.name,
-      managerId: school.managerId,
+      managerId: userRelatedStr,
     };
     return new Promise((resolver, reject) => {
       this.apollo
@@ -94,15 +115,15 @@ export class schoolService {
     });
   }
 
-  deleteSchool(SchoolIdStr: string):Promise<any> {
+  deleteSchool(schoolIdStr: string):Promise<any> {
     return new Promise((resolver, reject) => {
       this.apollo.mutate({
         fetchPolicy: 'no-cache',
         mutation: mutation_delete_school,
-        variables: { SchoolIdStr },
+        variables: { schoolIdStr },
       })
         .subscribe((result: any) => {
-          resolver(result.data.removeSchool);
+          resolver(result.data.createSchool);
         }),
         catchError((error: any) => {
           throw new Error(error);

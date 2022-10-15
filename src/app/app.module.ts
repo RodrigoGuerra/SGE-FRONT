@@ -18,9 +18,14 @@ import { MainComponent } from './main/main.component';
 import { GraphQLModule } from './graphql/graphql.module';
 import {RegistrationScreenComponent} from './registration-screen/registration-screen.component';
 import { SchoolsComponent } from './schools/schools.component';
-import { PersonComponent } from './person/person.component';
-import { DisciplineComponent } from './discipline/discipline.component';
 import { TeamComponent } from './team/team.component';
+import { SchoolListComponent } from './schools-list/schools-list.component';
+import { AddSchoolDialogComponent } from './add-school-dialog/add-school-dialog.component';
+import { EditSchoolDialogComponent } from './edit-school-dialog/edit-school-dialog.component';
+import { DisciplinesComponent } from './disciplines/disciplines.component';
+import { DisciplinesListComponent } from './disciplines-list/disciplines-list.component';
+import { AddDisciplinesDialogComponent } from './add-disciplines-dialog/add-disciplines-dialog.component';
+import { EditDisciplinesDialogComponent } from './edit-disciplines-dialog/edit-disciplines-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +35,14 @@ import { TeamComponent } from './team/team.component';
     MainComponent,
     RegistrationScreenComponent,
     SchoolsComponent,
-    PersonComponent,
-    DisciplineComponent,
     TeamComponent,
+    SchoolListComponent,
+    AddSchoolDialogComponent,
+    EditSchoolDialogComponent,
+    DisciplinesComponent,
+    DisciplinesListComponent,
+    AddDisciplinesDialogComponent,
+    EditDisciplinesDialogComponent,
   ],
   imports: [
     BrowserModule,

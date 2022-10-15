@@ -1,0 +1,19 @@
+<h2 mat-dialog-title> NOVA DISCIPLINA </h2>
+<mat-dialog-content [formGroup]="form">
+    <div class="example-container">
+
+        <mat-form-field>
+            <input matInput placeholder="Nome" formControlName="name" />
+        </mat-form-field>
+
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="onEdit()">
+        Save
+    </button>
+    <button mat-button color="primary" (click)="onCancel()">
+        Cancel
+    </button>
+</mat-dialog-actions>

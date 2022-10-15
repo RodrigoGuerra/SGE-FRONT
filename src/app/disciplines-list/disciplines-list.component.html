@@ -1,0 +1,19 @@
+<div>
+    <h3>Disciplinas</h3>
+    <button mat-raised-button color="gray" (click)="openAddDisciplineDialog()">NOVO</button>
+    <mat-card *ngFor="let element of (disciplinesData | async); let i = index" class="kid">
+        
+        <mat-card-header>
+            <button mat-button (click)="__cardClick(element)">
+                {{ element.name }}
+            </button>
+            <button mat-button color="primary" (click)="openDisciplineDialog(i, element)">
+                editar
+            </button>
+            <!-- <button mat-button (click)="deleteItem(element.disciplineId)">
+                deletar
+            </button> -->
+        </mat-card-header>
+        <hr>
+    </mat-card>
+</div>

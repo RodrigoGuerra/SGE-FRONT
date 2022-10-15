@@ -1,0 +1,19 @@
+<div>
+    <h3>Escolas</h3>
+    <button mat-raised-button color="gray" (click)="openAddSchoolDialog()">NOVO</button>
+    <mat-card *ngFor="let element of (schoolsData | async); let i = index" class="kid">
+        
+        <mat-card-header>
+            <button mat-button (click)="__cardClick(element)">
+                {{ element.name }}
+            </button>
+            <button mat-button color="primary" (click)="openSchoolDialog(i, element)">
+                editar
+            </button>
+            <!-- <button mat-button (click)="deleteItem(element.schoolId)">
+                deletar
+            </button> -->
+        </mat-card-header>
+        <hr>
+    </mat-card>
+</div>

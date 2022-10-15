@@ -9,6 +9,15 @@ export const query_get_discipline_by_name = gql` query ($nameStr:String!) {
     }
 }`;
 
+export const query_get_all_disciplines = gql` query () {
+  allDisciplines() {
+      disciplineId
+      name
+      createdAt
+      updatedAt
+  }
+}`;
+
 export const mutation_create_discipline = gql` mutation ($createDisciplineInput:CreateDisciplineInput!) {
     createDiscipline(
       createDisciplineInput: $createDisciplineInput
