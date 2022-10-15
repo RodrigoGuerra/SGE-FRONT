@@ -5,30 +5,32 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { Discipline } from '../models/discipline';
+import { Team } from '../models/team';
 import { MatDialogRef } from '@angular/material/dialog';
-import { DisciplineService } from '../services/discipline.service';
+import { TeamService } from '../services/team.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SessionService } from '../services/session.service';
 
 @Component({
-  selector: 'app-add-discipline-dialog',
-  templateUrl: './add-disciplines-dialog.component.html',
-  styleUrls: ['./add-disciplines-dialog.component.scss']
+  selector: 'app-add-team-dialog',
+  templateUrl: './add-teams-dialog.component.html',
+  styleUrls: ['./add-teams-dialog.component.scss']
 })
-export class AddDisciplinesDialogComponent implements OnInit {
+export class AddTeamsDialogComponent implements OnInit {
 
-  @ViewChild('disciplineId', { static: true }) disciplineIddvalue?: ElementRef;
+  @ViewChild('teamId', { static: true }) teamIddvalue?: ElementRef;
   @ViewChild('indexvalue', { static: true }) indexvalue!: ElementRef;
   form: FormGroup;
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<AddDisciplinesDialogComponent>,
-    private disciplineService: DisciplineService,
+    private dialogRef: MatDialogRef<AddTeamsDialogComponent>,
+    private teamService: TeamService,
     private sessionService : SessionService
   ) {
     this.form = fb.group({
       name: [""],
+      schoolId: [""],
+      disciplineId: [""],
     });
   }
 
@@ -37,8 +39,8 @@ export class AddDisciplinesDialogComponent implements OnInit {
   }
 
   onEdit() {
-    this.disciplineService
-     .createNewDiscipline(this.form.value)
+    this.teamService
+     .createNewTeam(this.form.value)
       .then((data) => {
         this.dialogRef.close(data);
       });

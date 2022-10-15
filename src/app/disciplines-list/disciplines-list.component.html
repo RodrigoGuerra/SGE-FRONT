@@ -5,6 +5,9 @@
         
         <mat-card-header>
             <button mat-button (click)="__cardClick(element)">
+                {{ element.disciplineId }}
+            </button>
+            <button mat-button (click)="__cardClick(element)">
                 {{ element.name }}
             </button>
             <button mat-button color="primary" (click)="openDisciplineDialog(i, element)">

@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   query_get_team_by_name,
+  query_get_all_teams,
   mutation_create_team,
   mutation_update_team,
   mutation_delete_team,
@@ -74,6 +75,26 @@ export class TeamService {
     });
   }
 
+  getListTeams(): Promise<Team> {
+    return new Promise((resolver, reject) => {
+      this.apollo
+        .watchQuery({
+          fetchPolicy: 'no-cache',
+          query: query_get_all_teams,
+          variables: {},
+        })
+        .valueChanges.subscribe((result: any) => {
+          if (!result.data.listTeams) {
+            reject('Team not found');
+          }
+          resolver(result.data.listTeams);
+        }),
+        catchError((error: any) => {
+          throw new Error(error);
+        });
+    });
+  }
+
   createNewTeam(team: Team):Promise<Team> {
     const createTeamInput = {
       name: team.name,
@@ -88,7 +109,7 @@ export class TeamService {
           variables: { createTeamInput },
         })
         .subscribe((result: any) => {
-          resolver(result.data.createTeam);
+          resolver(result.data.createTeamInput);
         }),
         catchError((error: any) => {
           throw new Error(error);

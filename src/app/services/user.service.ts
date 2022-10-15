@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Apollo } from 'apollo-angular';
 import {
   query_get_user_by_email,
+  query_get_all_users,
   mutation_create_user,
   mutation_update_user,
   mutation_delete_user,
@@ -74,6 +75,26 @@ export class UserService {
         });
     });
   }
+
+  getListUsers(): Promise<User> {
+    return new Promise((resolver, reject) => {
+      this.apollo
+        .watchQuery({
+          fetchPolicy: 'no-cache',
+          query: query_get_all_users,
+          variables: {},
+        })
+        .valueChanges.subscribe((result: any) => {
+          if (!result.data.listUsers) {
+            reject('Team not found');
+          }
+          resolver(result.data.listUsers);
+        }),
+        catchError((error: any) => {
+          throw new Error(error);
+        });
+    });
+  }
   
   createNewUser(user: User):Promise<User> {
     const createUserInput = {
@@ -91,7 +112,7 @@ export class UserService {
           variables: { createUserInput },
         })
         .subscribe((result: any) => {
-          resolver(result.data.createUser);
+          resolver(result.data.createUserInput);
         }),
         catchError((error: any) => {
           throw new Error(error);

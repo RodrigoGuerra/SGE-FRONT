@@ -1,0 +1,22 @@
+<div>
+    <h3>Usuários</h3>
+    <button mat-raised-button color="gray" (click)="openAddUserDialog()">NOVO</button>
+    <mat-card *ngFor="let element of (usersData | async); let i = index" class="kid">
+        
+        <mat-card-header>
+            <button mat-button (click)="__cardClick(element)">
+                {{ element.userId }}
+            </button>
+            <button mat-button (click)="__cardClick(element)">
+                {{ element.name }}
+            </button>
+            <button mat-button color="primary" (click)="openUserDialog(i, element)">
+                editar
+            </button>
+            <!-- <button mat-button (click)="deleteItem(element.userId)">
+                deletar
+            </button> -->
+        </mat-card-header>
+        <hr>
+    </mat-card>
+</div>

@@ -11,11 +11,22 @@ export const query_get_team_by_name = gql` query ($nameStr:String!) {
     }
 }`;
 
+export const query_get_all_teams = gql` query {
+  listTeams {
+      teamId
+      name
+      schoolId
+      disciplineId
+      createdAt
+      updatedAt
+  }
+}`;
+
 export const mutation_create_team = gql` mutation ($createTeamInput:CreateTeamInput!) {
     createTeam(
       createTeamInput: $createTeamInput
     ){
-        temId
+        teamId
         name
         schoolId
         disciplineId
@@ -29,7 +40,7 @@ export const mutation_update_team = gql` mutation ($updateTeamInput:UpdateTeamIn
     updateTeam(
       updateTeamInput: $updateTeamInput
     ){
-        temId
+        teamId
         name
         schoolId
         disciplineId

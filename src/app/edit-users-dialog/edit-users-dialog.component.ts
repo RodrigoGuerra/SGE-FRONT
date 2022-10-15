@@ -5,19 +5,19 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { Discipline } from '../models/discipline';
+import { User } from '../models/user';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DisciplineService } from '../services/discipline.service';
+import { UserService } from '../services/user.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SessionService } from '../services/session.service';
 
 @Component({
-  selector: 'app-edit-discipline-dialog',
-  templateUrl: './edit-disciplines-dialog.component.html',
-  styleUrls: ['./edit-disciplines-dialog.component.scss'],
+  selector: 'app-edit-user-dialog',
+  templateUrl: './edit-users-dialog.component.html',
+  styleUrls: ['./edit-users-dialog.component.scss'],
 })
-export class EditDisciplinesDialogComponent implements OnInit {
-  @ViewChild('disciplineId', { static: true }) disciplineIddvalue?: ElementRef;
+export class EditUsersDialogComponent implements OnInit {
+  @ViewChild('userId', { static: true }) userIddvalue?: ElementRef;
   @ViewChild('indexvalue', { static: true }) indexvalue!: ElementRef;
   name: string | undefined | null = '';
   form: FormGroup;
@@ -25,19 +25,27 @@ export class EditDisciplinesDialogComponent implements OnInit {
   encarregado=''
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<EditDisciplinesDialogComponent>,
-    private disciplineService: DisciplineService,
+    private dialogRef: MatDialogRef<EditUsersDialogComponent>,
+    private userService: UserService,
     private sessionService: SessionService,
     @Inject(MAT_DIALOG_DATA)
     {
-      disciplineId,
+      userId,
       name,
+      email,
+      phone,
+      age,
+      roleId,
       createdAt,
-    }: Discipline
+    }: User
   ) {
     this.form = fb.group({
-      disciplineId: [disciplineId],
+      userId: [userId],
       name: [name],
+      email: [email],
+      phone: [phone],
+      age: [Number(age)],
+      roleId: [Number(roleId)],
       createdAt: [createdAt],
     });
     this.createdAtFormated = new Date(parseInt(createdAt, 10)).toLocaleString();
@@ -46,19 +54,19 @@ export class EditDisciplinesDialogComponent implements OnInit {
 
   ngOnInit() {
     
-    this.disciplineService
-    .getListDisciplines()
+    this.userService
+    .getListUsers()
     // .then(res=>{this.usersOptions=[...res]}).catch(err=>{
     //   console.log("Error on get users")
     // });
-    console.log('EditDisciplineDialogComponent');
+    console.log('EditUserDialogComponent');
   }
 
   onEdit() {
-    this.disciplineService
-      .updateDiscipline(this.form.value)
-      .then((discipline) => {
-        this.dialogRef.close(discipline);
+    this.userService
+      .updateUser(this.form.value)
+      .then((user) => {
+        this.dialogRef.close(user);
       });
   }
 

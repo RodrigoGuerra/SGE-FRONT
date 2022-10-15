@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DisciplineService } from '../services/discipline.service';
+import { UserService } from '../services/user.service';
 import { Observable } from 'rxjs';
-import { Discipline } from '../models/discipline';
+import { User } from '../models/user';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,20 +11,20 @@ import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
 import {} from '@angular/material/';
-import { AddDisciplinesDialogComponent } from '../add-disciplines-dialog/add-disciplines-dialog.component'
-import { EditDisciplinesDialogComponent } from '../edit-disciplines-dialog/edit-disciplines-dialog.component';
+import { AddUsersDialogComponent } from '../add-users-dialog/add-users-dialog.component'
+import { EditUsersDialogComponent } from '../edit-users-dialog/edit-users-dialog.component';
 import { SessionService } from '../services/session.service';
 
 @Component({
-  selector: 'app-disciplines-list',
-  templateUrl: './disciplines-list.component.html',
-  styleUrls: ['./disciplines-list.component.scss'],
+  selector: 'app-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss'],
 })
-export class DisciplinesListComponent implements OnInit {
-  @Input() disciplinesData?: Observable<Discipline[]>;
-  discipline?: Discipline;
+export class UsersListComponent implements OnInit {
+  @Input() usersData?: Observable<User[]>;
+  user?: User;
   constructor(
-    private disciplineService: DisciplineService,
+    private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -33,25 +33,29 @@ export class DisciplinesListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.disciplinesData = this.disciplineService.disciplinesSet;
-    this.disciplineService.getListDisciplines();
-    this.disciplinesData.subscribe((data) => {
+    this.usersData = this.userService.usersSet;
+    this.userService.getListUsers();
+    this.usersData.subscribe((data) => {
       console.log(data);
     });
   }
 
-  __cardClick(discipline: Discipline) {
-    console.log(discipline);
-    this.router.navigate(['disciplines', discipline.disciplineId]);
+  __cardClick(user: User) {
+    console.log(user);
+    this.router.navigate(['users', user.userId]);
   }
 
-  openDisciplineDialog(
+  openUserDialog(
     index: number,
     {
-      disciplineId,
+      userId,
       name,
+      email,
+      phone,
+      age,
+      roleId,
       createdAt,
-    }: Discipline
+    }: User
   ) {
     const dialogConfig = new MatDialogConfig();
 
@@ -59,25 +63,29 @@ export class DisciplinesListComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '450px';
     dialogConfig.data = {
-      disciplineId,
+      userId,
       name,
+      email,
+      phone,
+      age,
+      roleId,
       createdAt,
     };
-    const dialogRef = this.dialog.open(EditDisciplinesDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(EditUsersDialogComponent, dialogConfig);
     dialogRef
       .afterClosed()
       .subscribe((val) => {console.log('Dialog output:', val); this.ngOnInit()});
 
   }
 
-  openAddDisciplineDialog() {
+  openAddUserDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '450px';
     dialogConfig.data = {  userRelated:""};
-    const dialogRef = this.dialog.open(AddDisciplinesDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(AddUsersDialogComponent, dialogConfig);
     dialogRef
       .afterClosed()
       .subscribe((val) => {console.log('Dialog output:', val); this.ngOnInit()});
@@ -93,7 +101,7 @@ export class DisciplinesListComponent implements OnInit {
   }
 
   deleteItem(id: string) {
-    this.disciplineService.deleteDiscipline(id).then(()=>{ this.ngOnInit()});
+    this.userService.deleteUser(id).then(()=>{ this.ngOnInit()});
   }
   
 }

@@ -73,7 +73,7 @@ export class DisciplineService {
     });
   }
 
-  getAllDisciplines(): Promise<Discipline> {
+  getListDisciplines(): Promise<Discipline> {
     return new Promise((resolver, reject) => {
       this.apollo
         .watchQuery({
@@ -82,10 +82,10 @@ export class DisciplineService {
           variables: {},
         })
         .valueChanges.subscribe((result: any) => {
-          if (!result.data.allDisciplines) {
+          if (!result.data.listDisciplines) {
             reject('Discipline not found');
           }
-          resolver(result.data.allDisciplines);
+          resolver(result.data.listDisciplines);
         }),
         catchError((error: any) => {
           throw new Error(error);

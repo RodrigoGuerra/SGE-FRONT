@@ -37,12 +37,26 @@
               <strong>Turmas</strong>
             </span>
           </mat-list-item>
-        </a>    
+        </a>
+        <a [routerLink]="['/main/users']" *ngIf="isManager" >
+          <mat-list-item>
+            <span class="user-name">
+              <strong>Usuarios</strong>
+            </span>
+          </mat-list-item>
+        </a>
+        <a [routerLink]="['/main/users']" *ngIf="isManager" >
+          <mat-list-item>
+            <span class="user-name">
+              <strong>Usuarios por turma</strong>
+            </span>
+          </mat-list-item>
+        </a>
       </mat-nav-list>
       <div class="copyright-container">
         <div fxFlex>
           <button (click)="logOut()">
-            <mat-icon>exit_to_app</mat-icon>
+            exit
           </button>
         </div>
       </div>

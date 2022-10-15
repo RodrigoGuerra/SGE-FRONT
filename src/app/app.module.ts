@@ -26,6 +26,13 @@ import { DisciplinesComponent } from './disciplines/disciplines.component';
 import { DisciplinesListComponent } from './disciplines-list/disciplines-list.component';
 import { AddDisciplinesDialogComponent } from './add-disciplines-dialog/add-disciplines-dialog.component';
 import { EditDisciplinesDialogComponent } from './edit-disciplines-dialog/edit-disciplines-dialog.component';
+import { TeamsListComponent } from './teams-list/teams-list.component';
+import { AddTeamsDialogComponent } from './add-teams-dialog/add-teams-dialog.component';
+import { EditTeamsDialogComponent } from './edit-teams-dialog/edit-teams-dialog.component';
+import { UsersListComponent } from './users-list/users-list.component';
+import { AddUsersDialogComponent } from './add-users-dialog/add-users-dialog.component';
+import { EditUsersDialogComponent } from './edit-users-dialog/edit-users-dialog.component';
+import { UsersComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +50,13 @@ import { EditDisciplinesDialogComponent } from './edit-disciplines-dialog/edit-d
     DisciplinesListComponent,
     AddDisciplinesDialogComponent,
     EditDisciplinesDialogComponent,
+    TeamsListComponent,
+    AddTeamsDialogComponent,
+    EditTeamsDialogComponent,
+    UsersListComponent,
+    AddUsersDialogComponent,
+    EditUsersDialogComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

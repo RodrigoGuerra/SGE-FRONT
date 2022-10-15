@@ -4,6 +4,8 @@ import { LoginComponent } from '../app/login/login.component';
 import { MainComponent } from './main/main.component';
 import { SchoolsComponent } from './schools/schools.component';
 import { DisciplinesComponent } from './disciplines/disciplines.component';
+import { TeamComponent } from './team/team.component';
+import { UsersComponent } from './user/user.component';
 import { RegistrationScreenComponent } from './registration-screen/registration-screen.component';
 
 const routes: Routes = [
@@ -22,10 +24,14 @@ const routes: Routes = [
         path: 'disciplines',
        component: DisciplinesComponent
       },
-      // {
-      //   path: 'employees',
-      //   component: EmployeeListComponent
-      // },
+      {
+        path: 'teams',
+        component: TeamComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+      },
       {
         path: '',
         redirectTo: 'schools',

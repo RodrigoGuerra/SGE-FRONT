@@ -5,19 +5,19 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { Discipline } from '../models/discipline';
+import { Team } from '../models/team';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DisciplineService } from '../services/discipline.service';
+import { TeamService } from '../services/team.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SessionService } from '../services/session.service';
 
 @Component({
-  selector: 'app-edit-discipline-dialog',
-  templateUrl: './edit-disciplines-dialog.component.html',
-  styleUrls: ['./edit-disciplines-dialog.component.scss'],
+  selector: 'app-edit-team-dialog',
+  templateUrl: './edit-teams-dialog.component.html',
+  styleUrls: ['./edit-teams-dialog.component.scss'],
 })
-export class EditDisciplinesDialogComponent implements OnInit {
-  @ViewChild('disciplineId', { static: true }) disciplineIddvalue?: ElementRef;
+export class EditTeamsDialogComponent implements OnInit {
+  @ViewChild('teamId', { static: true }) teamIddvalue?: ElementRef;
   @ViewChild('indexvalue', { static: true }) indexvalue!: ElementRef;
   name: string | undefined | null = '';
   form: FormGroup;
@@ -25,19 +25,23 @@ export class EditDisciplinesDialogComponent implements OnInit {
   encarregado=''
   constructor(
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<EditDisciplinesDialogComponent>,
-    private disciplineService: DisciplineService,
+    private dialogRef: MatDialogRef<EditTeamsDialogComponent>,
+    private teamService: TeamService,
     private sessionService: SessionService,
     @Inject(MAT_DIALOG_DATA)
     {
-      disciplineId,
+      teamId,
       name,
+      disciplineId,
+      schoolId,
       createdAt,
-    }: Discipline
+    }: Team
   ) {
     this.form = fb.group({
-      disciplineId: [disciplineId],
+      teamId: [teamId],
       name: [name],
+      disciplineId: [disciplineId],
+      schoolId: [schoolId],
       createdAt: [createdAt],
     });
     this.createdAtFormated = new Date(parseInt(createdAt, 10)).toLocaleString();
@@ -46,19 +50,19 @@ export class EditDisciplinesDialogComponent implements OnInit {
 
   ngOnInit() {
     
-    this.disciplineService
-    .getListDisciplines()
+    this.teamService
+    .getListTeams()
     // .then(res=>{this.usersOptions=[...res]}).catch(err=>{
     //   console.log("Error on get users")
     // });
-    console.log('EditDisciplineDialogComponent');
+    console.log('EditTeamDialogComponent');
   }
 
   onEdit() {
-    this.disciplineService
-      .updateDiscipline(this.form.value)
-      .then((discipline) => {
-        this.dialogRef.close(discipline);
+    this.teamService
+      .updateTeam(this.form.value)
+      .then((team) => {
+        this.dialogRef.close(team);
       });
   }
 

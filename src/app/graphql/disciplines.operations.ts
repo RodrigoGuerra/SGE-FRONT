@@ -9,8 +9,8 @@ export const query_get_discipline_by_name = gql` query ($nameStr:String!) {
     }
 }`;
 
-export const query_get_all_disciplines = gql` query () {
-  allDisciplines() {
+export const query_get_all_disciplines = gql` query {
+  listDisciplines {
       disciplineId
       name
       createdAt

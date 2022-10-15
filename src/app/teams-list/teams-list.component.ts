@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DisciplineService } from '../services/discipline.service';
+import { TeamService } from '../services/team.service';
 import { Observable } from 'rxjs';
-import { Discipline } from '../models/discipline';
+import { Team } from '../models/team';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,20 +11,20 @@ import {
   MatSnackBar,
 } from '@angular/material/snack-bar';
 import {} from '@angular/material/';
-import { AddDisciplinesDialogComponent } from '../add-disciplines-dialog/add-disciplines-dialog.component'
-import { EditDisciplinesDialogComponent } from '../edit-disciplines-dialog/edit-disciplines-dialog.component';
+import { AddTeamsDialogComponent } from '../add-teams-dialog/add-teams-dialog.component'
+import { EditTeamsDialogComponent } from '../edit-teams-dialog/edit-teams-dialog.component';
 import { SessionService } from '../services/session.service';
 
 @Component({
-  selector: 'app-disciplines-list',
-  templateUrl: './disciplines-list.component.html',
-  styleUrls: ['./disciplines-list.component.scss'],
+  selector: 'app-teams-list',
+  templateUrl: './teams-list.component.html',
+  styleUrls: ['./teams-list.component.scss'],
 })
-export class DisciplinesListComponent implements OnInit {
-  @Input() disciplinesData?: Observable<Discipline[]>;
-  discipline?: Discipline;
+export class TeamsListComponent implements OnInit {
+  @Input() teamsData?: Observable<Team[]>;
+  team?: Team;
   constructor(
-    private disciplineService: DisciplineService,
+    private teamservice: TeamService,
     private router: Router,
     private route: ActivatedRoute,
     private dialog: MatDialog,
@@ -33,25 +33,27 @@ export class DisciplinesListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.disciplinesData = this.disciplineService.disciplinesSet;
-    this.disciplineService.getListDisciplines();
-    this.disciplinesData.subscribe((data) => {
+    this.teamsData = this.teamservice.teamsSet;
+    this.teamservice.getListTeams();
+    this.teamsData.subscribe((data) => {
       console.log(data);
     });
   }
 
-  __cardClick(discipline: Discipline) {
-    console.log(discipline);
-    this.router.navigate(['disciplines', discipline.disciplineId]);
+  __cardClick(team: Team) {
+    console.log(team);
+    this.router.navigate(['teams', team.teamId]);
   }
 
-  openDisciplineDialog(
+  openTeamDialog(
     index: number,
     {
-      disciplineId,
+      teamId,
       name,
+      disciplineId,
+      schoolId,
       createdAt,
-    }: Discipline
+    }: Team
   ) {
     const dialogConfig = new MatDialogConfig();
 
@@ -59,25 +61,27 @@ export class DisciplinesListComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '450px';
     dialogConfig.data = {
-      disciplineId,
+      teamId,
       name,
+      disciplineId,
+      schoolId,
       createdAt,
     };
-    const dialogRef = this.dialog.open(EditDisciplinesDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(EditTeamsDialogComponent, dialogConfig);
     dialogRef
       .afterClosed()
       .subscribe((val) => {console.log('Dialog output:', val); this.ngOnInit()});
 
   }
 
-  openAddDisciplineDialog() {
+  openAddTeamDialog() {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '450px';
     dialogConfig.data = {  userRelated:""};
-    const dialogRef = this.dialog.open(AddDisciplinesDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(AddTeamsDialogComponent, dialogConfig);
     dialogRef
       .afterClosed()
       .subscribe((val) => {console.log('Dialog output:', val); this.ngOnInit()});
@@ -93,7 +97,7 @@ export class DisciplinesListComponent implements OnInit {
   }
 
   deleteItem(id: string) {
-    this.disciplineService.deleteDiscipline(id).then(()=>{ this.ngOnInit()});
+    this.teamservice.deleteTeam(id).then(()=>{ this.ngOnInit()});
   }
   
 }
