@@ -88,7 +88,9 @@ export class UserService {
           if (!result.data.listUsers) {
             reject('Team not found');
           }
-          resolver(result.data.listUsers);
+          //resolver(result.data.listUsers);
+          this.dataStore.usersSet = result.data.listUsers;
+          this._usersSet.next(this.dataStore.usersSet);
         }),
         catchError((error: any) => {
           throw new Error(error);
@@ -112,7 +114,7 @@ export class UserService {
           variables: { createUserInput },
         })
         .subscribe((result: any) => {
-          resolver(result.data.createUserInput);
+          resolver(result.data.createUserInput);          
         }),
         catchError((error: any) => {
           throw new Error(error);

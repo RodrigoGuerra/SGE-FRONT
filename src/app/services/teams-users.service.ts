@@ -42,7 +42,9 @@ export class TeamsUsersService {
           if (!result.data.listTeamsUsers) {
             reject('Team not found');
           }
-          resolver(result.data.listTeamsUsers);
+          //resolver(result.data.listTeamsUsers);
+          this.dataStore.teamsUsersSet = result.data.listTeamsUsers;
+          this._teamsUsersSet.next(this.dataStore.teamsUsersSet);
         }),
         catchError((error: any) => {
           throw new Error(error);
@@ -50,8 +52,8 @@ export class TeamsUsersService {
     });
   }
   
-  createNewUser(user: TeamsUsers):Promise<TeamsUsers> {
-    const createUserInput = {
+  createTeamsNewUsers(user: TeamsUsers):Promise<TeamsUsers> {
+    const createTeamsUsersInput = {
       teamId: user.teamId,
       userId: user.userId,
     };
@@ -60,10 +62,10 @@ export class TeamsUsersService {
         .mutate({
           fetchPolicy: 'no-cache',
           mutation: mutation_create_teams_users,
-          variables: { createUserInput },
+          variables: { createTeamsUsersInput },
         })
         .subscribe((result: any) => {
-          resolver(result.data.createUser);
+          resolver(result.data.createTeamsUsersInput);          
         }),
         catchError((error: any) => {
           throw new Error(error);

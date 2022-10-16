@@ -87,7 +87,9 @@ export class TeamService {
           if (!result.data.listTeams) {
             reject('Team not found');
           }
-          resolver(result.data.listTeams);
+          //resolver(result.data.listTeams);
+          this.dataStore.teamsSet = result.data.listTeams;
+          this._teamsSet.next(this.dataStore.teamsSet);
         }),
         catchError((error: any) => {
           throw new Error(error);

@@ -33,6 +33,9 @@ import { UsersListComponent } from './users-list/users-list.component';
 import { AddUsersDialogComponent } from './add-users-dialog/add-users-dialog.component';
 import { EditUsersDialogComponent } from './edit-users-dialog/edit-users-dialog.component';
 import { UsersComponent } from './user/user.component';
+import { TeamsUsersListComponent } from './teams-users-list/teams-users-list.component';
+import { AddTeamsUsersDialogComponent } from './add-teams-users-dialog/add-teams-users-dialog.component';
+import { TeamsUsersComponent } from './teams-users/teams-users.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +60,9 @@ import { UsersComponent } from './user/user.component';
     AddUsersDialogComponent,
     EditUsersDialogComponent,
     UsersComponent,
+    TeamsUsersListComponent,
+    AddTeamsUsersDialogComponent,
+    TeamsUsersComponent,
   ],
   imports: [
     BrowserModule,

@@ -85,7 +85,9 @@ export class DisciplineService {
           if (!result.data.listDisciplines) {
             reject('Discipline not found');
           }
-          resolver(result.data.listDisciplines);
+          //resolver(result.data.listDisciplines);
+          this.dataStore.disciplinesSet = result.data.listDisciplines;
+          this._disciplinesSet.next(this.dataStore.disciplinesSet);
         }),
         catchError((error: any) => {
           throw new Error(error);

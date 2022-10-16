@@ -12,7 +12,7 @@ export const query_get_all_teams_users = gql` query {
 
 export const mutation_create_teams_users = gql` mutation ($createTeamsUsersInput:CreateTeamsUsersInput!) {
     createTeamsUsers(
-      createTeamsUsersInput: $createTeamInput
+      createTeamsUsersInput: $createTeamsUsersInput
     ){
       teamsUsersId
       teamId

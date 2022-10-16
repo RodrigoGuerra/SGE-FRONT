@@ -6,6 +6,7 @@ import { SchoolsComponent } from './schools/schools.component';
 import { DisciplinesComponent } from './disciplines/disciplines.component';
 import { TeamComponent } from './team/team.component';
 import { UsersComponent } from './user/user.component';
+import { TeamsUsersComponent } from './teams-users/teams-users.component';
 import { RegistrationScreenComponent } from './registration-screen/registration-screen.component';
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent
+      },
+      {
+        path: 'teams-users',
+        component: TeamsUsersComponent
       },
       {
         path: '',
